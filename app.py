@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS
 from ai.gemini import ask_campus_ai
 from ai.recommender import (
     load_colleges,
     find_colleges_by_stream_degree_location_and_budget
 )
 app = Flask(__name__)
+CORS(app)
 
 colleges = load_colleges()
 
