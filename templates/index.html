@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AICollegeAdvisor</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        <span>AI</span>CollegeAdvisor
+    </div>
+
+    <div class="nav-links">
+
+        <a href="#home">Home</a>
+
+        <a href="#how">How it works</a>
+
+        <a href="#advisor">AI Advisor</a>
+
+        <a href="#chatbot">AI Chat</a>
+
+    </div>
+
+    <button class="nav-button"
+            onclick="startAdvisor()">
+
+        Find My College →
+
+    </button>
+
+</nav>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero"
+         id="home">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            ✦ AI-powered college discovery
+        </div>
+
+        <h1>
+
+            Your future doesn't need
+
+            <span>47 browser tabs.</span>
+
+        </h1>
+
+        <p>
+
+            Tell us what you've studied, what you're into,
+            and where you want to go.
+            We'll help you figure out what's next.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <button class="primary-button"
+                    onclick="startAdvisor()">
+
+                Find My College →
+
+            </button>
+
+
+            <button class="secondary-button"
+                    onclick="scrollToChat()">
+
+                Talk to AI ✦
+
+            </button>
+
+        </div>
+
+
+        <div class="hero-note">
+
+            No confusing forms. No college chaos.
+
+        </div>
+
+    </div>
+
+
+
+    <!-- HERO CARD -->
+
+    <div class="hero-card">
+
+        <div class="floating-icon icon-one">
+            🎓
+        </div>
+
+        <div class="floating-icon icon-two">
+            ✨
+        </div>
+
+
+        <div class="advisor-card">
+
+            <div class="advisor-top">
+
+                <div class="avatar">
+                    AI
+                </div>
+
+                <div>
+
+                    <strong>
+                        CampusAI
+                    </strong>
+
+                    <small>
+                        Your AI college sidekick
+                    </small>
+
+                </div>
+
+                <div class="online">
+                    ●
+                </div>
+
+            </div>
+
+
+            <div class="chat-bubble">
+
+                yo 👋
+
+                <br><br>
+
+                Not sure what to do after
+                12th? That's literally why
+                I'm here.
+
+            </div>
+
+
+            <div class="suggestions">
+
+                <span>
+                    💻 Engineering
+                </span>
+
+                <span>
+                    💼 BBA
+                </span>
+
+                <span>
+                    🩺 Medical
+                </span>
+
+                <span>
+                    🤔 I'm confused
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     HOW IT WORKS
+===================================================== -->
+
+<section class="how"
+         id="how">
+
+
+    <div class="section-heading">
+
+        <div class="badge">
+            HOW IT WORKS
+        </div>
+
+        <h2>
+
+            From “idk what to do”
+
+            <br>
+
+            to “okay, this makes sense.”
+
+        </h2>
+
+    </div>
+
+
+
+    <div class="steps">
+
+
+        <!-- STEP 01 -->
+
+        <div class="step-card">
+
+            <div class="step-number">
+                01
+            </div>
+
+            <div class="step-icon">
+                👋
+            </div>
+
+            <h3>
+                Tell us about you
+            </h3>
+
+            <p>
+
+                Your education, stream and
+                academic background.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- STEP 02 -->
+
+        <div class="step-card">
+
+            <div class="step-number">
+                02
+            </div>
+
+            <div class="step-icon">
+                🧭
+            </div>
+
+            <h3>
+                Pick your path
+            </h3>
+
+            <p>
+
+                Explore engineering, medical,
+                management, pharma and more.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- STEP 03 -->
+
+        <div class="step-card">
+
+            <div class="step-number">
+                03
+            </div>
+
+            <div class="step-icon">
+                📍
+            </div>
+
+            <h3>
+                Choose your location
+            </h3>
+
+            <p>
+
+                Find options based on where
+                you actually want to study.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- STEP 04 -->
+
+        <div class="step-card">
+
+            <div class="step-number">
+                04
+            </div>
+
+            <div class="step-icon">
+                ✨
+            </div>
+
+            <h3>
+                Let AI do the work
+            </h3>
+
+            <p>
+
+                Get personalized college
+                recommendations.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     AI COLLEGE ADVISOR
+===================================================== -->
+
+<section id="advisor">
+
+
+<div class="advisor-container">
+
+
+    <!-- ADVISOR HEADER -->
+
+    <div class="section-heading">
+
+        <div class="badge">
+            ✦ AI COLLEGE ADVISOR
+        </div>
+
+        <h2>
+
+            Let's figure out
+
+            <span>your next move.</span>
+
+        </h2>
+
+        <p>
+
+            A few questions. Zero academic interrogation.
+            We'll use your answers to build your college shortlist.
+
+        </p>
+
+    </div>
+
+
+
+    <!-- =================================================
+         PROGRESS
+    ================================================= -->
+
+    <div class="progress-container">
+
+        <div class="progress-info">
+
+            <span id="stepText">
+                Step 1 of 7
+            </span>
+
+            <span id="progressPercent">
+                14%
+            </span>
+
+        </div>
+
+
+        <div class="progress-bar">
+
+            <div id="progress"
+                 class="progress">
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         STEP 1 : EDUCATION
+    ================================================= -->
+
+    <div class="question-card"
+         id="step1">
+
+
+        <div class="question-number">
+            01 / EDUCATION
+        </div>
+
+
+        <h3>
+            Okay, where are you at rn? 👀
+        </h3>
+
+
+        <p>
+            What's your current education level?
+        </p>
+
+
+
+        <div class="options">
+
+
+            <button class="option"
+                    onclick="selectEducation('10th', this)">
+
+                <span>
+                    📚
+                </span>
+
+                <div>
+
+                    <strong>
+                        10th Completed
+                    </strong>
+
+                    <small>
+                        Looking for what comes next
+                    </small>
+
+                </div>
+
+            </button>
+
+
+
+            <button class="option"
+                    onclick="selectEducation('12th', this)">
+
+                <span>
+                    🎓
+                </span>
+
+                <div>
+
+                    <strong>
+                        12th Completed
+                    </strong>
+
+                    <small>
+                        Ready for higher education
+                    </small>
+
+                </div>
+
+            </button>
+
+
+
+            <button class="option"
+                    onclick="selectEducation('Diploma', this)">
+
+                <span>
+                    💻
+                </span>
+
+                <div>
+
+                    <strong>
+                        Diploma
+                    </strong>
+
+                    <small>
+                        Looking for the next step
+                    </small>
+
+                </div>
+
+            </button>
+
+
+
+            <button class="option"
+                    onclick="selectEducation('Graduate', this)">
+
+                <span>
+                    🎓
+                </span>
+
+                <div>
+
+                    <strong>
+                        Graduate
+                    </strong>
+
+                    <small>
+                        Looking for further studies
+                    </small>
+
+                </div>
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         STEP 2 : STREAM
+    ================================================= -->
+
+    <div class="question-card hidden"
+         id="step2">
+
+
+        <div class="question-number">
+            02 / STREAM
+        </div>
+
+
+        <h3>
+            What did you study? 👀
+        </h3>
+
+
+        <p>
+            Pick your stream.
+        </p>
+
+
+
+        <div class="options">
+
+
+            <button class="option"
+                    onclick="selectStream('Science', this)">
+
+                <span>
+                    🔬
+                </span>
+
+                <div>
+
+                    <strong>
+                        Science
+                    </strong>
+
+                    <small>
+                        PCM / PCB / PCMB
+                    </small>
+
+                </div>
+
+            </button>
+
+
+
+            <button class="option"
+                    onclick="selectStream('Commerce', this)">
+
+                <span>
+                    💼
+                </span>
+
+                <div>
+
+                    <strong>
+                        Commerce
+                    </strong>
+
+                    <small>
+                        Business, finance & economics
+                    </small>
+
+                </div>
+
+            </button>
+
+
+
+            <button class="option"
+                    onclick="selectStream('Arts', this)">
+
+                <span>
+                    🎨
+                </span>
+
+                <div>
+
+                    <strong>
+                        Arts / Humanities
+                    </strong>
+
+                    <small>
+                        Creative & social sciences
+                    </small>
+
+                </div>
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         STEP 3 : INTEREST
+    ================================================= -->
+
+    <div class="question-card hidden"
+         id="step3">
+
+
+        <div class="question-number">
+            03 / INTEREST
+        </div>
+
+
+        <h3 id="fieldQuestion">
+
+            What's calling your name? 👀
+
+        </h3>
+
+
+        <p id="fieldDescription">
+
+            Pick an area you're interested in.
+
+        </p>
+
+
+        <div class="options"
+             id="fieldOptions">
+
+            <!-- JavaScript creates options -->
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         STEP 4 : PROGRAM
+    ================================================= -->
+
+    <div class="question-card hidden"
+         id="step4">
+
+
+        <div class="question-number">
+            04 / PROGRAM
+        </div>
+
+
+        <h3>
+
+            What kind of degree are you looking for? 🎓
+
+        </h3>
+
+
+        <p>
+
+            Pick your preferred program type.
+
+        </p>
+
+
+        <div class="options"
+             id="degreeOptions">
+
+            <!-- JavaScript creates options -->
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         STEP 5 : BUDGET
+    ================================================= -->
+
+    <div class="question-card hidden"
+         id="step5">
+
+
+        <div class="question-number">
+            05 / BUDGET
+        </div>
+
+
+        <h3>
+
+            Let's talk money, no awkwardness. 💸
+
+        </h3>
+
+
+        <p>
+
+            What's your approximate annual college budget?
+
+        </p>
+
+
+
+        <div class="options">
+
+
+            <button class="option"
+                    onclick="selectBudget('Under ₹1 Lakh', this)">
+
+                <span>
+                    💚
+                </span>
+
+                <div>
+
+                    <strong>
+                        Under ₹1 Lakh
+                    </strong>
+
+                    <small>
+                        Budget-friendly options
+                    </small>
+
+                </div>
+
+            </button>
+
+
+
+            <button class="option"
+                    onclick="selectBudget('₹1–3 Lakhs', this)">
+
+                <span>
+                    💰
+                </span>
+
+                <div>
+
+                    <strong>
+                        ₹1–3 Lakhs
+                    </strong>
+
+                    <small>
+                        Mid-range options
+                    </small>
+
+                </div>
+
+            </button>
+
+
+
+            <button class="option"
+                    onclick="selectBudget('₹3–5 Lakhs', this)">
+
+                <span>
+                    💸
+                </span>
+
+                <div>
+
+                    <strong>
+                        ₹3–5 Lakhs
+                    </strong>
+
+                    <small>
+                        More options available
+                    </small>
+
+                </div>
+
+            </button>
+
+
+
+            <button class="option"
+                    onclick="selectBudget('₹5 Lakhs+', this)">
+
+                <span>
+                    ✨
+                </span>
+
+                <div>
+
+                    <strong>
+                        ₹5 Lakhs+
+                    </strong>
+
+                    <small>
+                        Open to premium options
+                    </small>
+
+                </div>
+
+            </button>
+
+
+
+            <button class="option"
+                    onclick="selectBudget('Flexible', this)">
+
+                <span>
+                    🪄
+                </span>
+
+                <div>
+
+                    <strong>
+                        I'm flexible
+                    </strong>
+
+                    <small>
+                        Show me the best options
+                    </small>
+
+                </div>
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==========================================
+     STEP 6 — LOCATION
+========================================== -->
+
+<div class="question-card hidden" id="step6">
+
+    <div class="question-number">
+        06 / LOCATION
+    </div>
+
+    <h3>
+        Where do you want to study? 📍
+    </h3>
+
+    <p>
+        Enter a city, area, or state where you'd like to study.
+    </p>
+
+    <div class="location-input">
+
+        <input
+            type="text"
+            id="location"
+            placeholder="Example: Pune, Mumbai, Bangalore..."
+            autocomplete="off"
+        >
+
+    </div>
+
+    <button
+        class="primary-button full-button"
+        onclick="submitLocation()"
+    >
+        Continue →
+    </button>
+
+</div>
+
+
+    <!-- =================================================
+         STEP 7 : PRIORITIES
+    ================================================= -->
+
+    <div class="question-card hidden"
+         id="step7">
+
+
+        <div class="question-number">
+            07 / PRIORITIES
+        </div>
+
+
+        <h3>
+            What actually matters to you? 👀
+        </h3>
+
+
+        <p>
+            Select everything you care about.
+        </p>
+
+
+
+        <div class="priority-grid">
+
+
+            <button class="priority-option"
+                    onclick="togglePriority(this, 'Placements')">
+
+                📈
+
+                <span>
+                    Placements
+                </span>
+
+            </button>
+
+
+
+            <button class="priority-option"
+                    onclick="togglePriority(this, 'Affordable Fees')">
+
+                💰
+
+                <span>
+                    Affordable fees
+                </span>
+
+            </button>
+
+
+
+            <button class="priority-option"
+                    onclick="togglePriority(this, 'Campus Life')">
+
+                🏫
+
+                <span>
+                    Campus life
+                </span>
+
+            </button>
+
+
+
+            <button class="priority-option"
+                    onclick="togglePriority(this, 'Hostel')">
+
+                🛏️
+
+                <span>
+                    Hostel
+                </span>
+
+            </button>
+
+
+
+            <button class="priority-option"
+                    onclick="togglePriority(this, 'Location')">
+
+                📍
+
+                <span>
+                    Location
+                </span>
+
+            </button>
+
+
+
+            <button class="priority-option"
+                    onclick="togglePriority(this, 'Course Options')">
+
+                🎓
+
+                <span>
+                    Course options
+                </span>
+
+            </button>
+
+
+        </div>
+
+
+
+        <button class="primary-button full-button"
+                onclick="submitAdvisor()">
+
+            ✨ Find My Colleges
+
+        </button>
+
+    </div>
+
+
+
+    <!-- =================================================
+         RESULTS
+    ================================================= -->
+
+    <div class="result-card hidden"
+         id="result">
+
+
+        <!-- RESULT HEADER -->
+
+        <div class="result-header">
+
+
+            <div class="result-icon">
+                ✨
+            </div>
+
+
+            <div>
+
+                <div class="result-eyebrow">
+                    YOUR COLLEGE MATCH
+                </div>
+
+
+                <h3>
+                    Your profile is ready!
+                </h3>
+
+
+                <p>
+                    Here's what we found based on your preferences.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PROFILE SUMMARY
+        ================================================= -->
+
+        <div class="profile-summary">
+
+
+            <div class="profile-title">
+
+                <span>
+                    👤
+                </span>
+
+
+                <div>
+
+                    <h4>
+                        Your Profile
+                    </h4>
+
+                    <p>
+                        Your college search snapshot
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="profile-grid">
+
+
+                <!-- EDUCATION -->
+
+                <div class="profile-item">
+
+                    <span class="profile-icon">
+                        🎓
+                    </span>
+
+
+                    <div>
+
+                        <small>
+                            EDUCATION LEVEL
+                        </small>
+
+                        <strong id="profileEducation">
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- STREAM -->
+
+                <div class="profile-item">
+
+                    <span class="profile-icon">
+                        📚
+                    </span>
+
+
+                    <div>
+
+                        <small>
+                            ACADEMIC STREAM
+                        </small>
+
+                        <strong id="profileStream">
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- INTEREST -->
+
+                <div class="profile-item">
+
+                    <span class="profile-icon">
+                        🎯
+                    </span>
+
+
+                    <div>
+
+                        <small>
+                            AREA OF INTEREST
+                        </small>
+
+                        <strong id="profileField">
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PROGRAM -->
+
+                <div class="profile-item">
+
+                    <span class="profile-icon">
+                        🏫
+                    </span>
+
+
+                    <div>
+
+                        <small>
+                            PROGRAM
+                        </small>
+
+                        <strong id="profileDegree">
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- BUDGET -->
+
+                <div class="profile-item">
+
+                    <span class="profile-icon">
+                        💰
+                    </span>
+
+
+                    <div>
+
+                        <small>
+                            ANNUAL BUDGET
+                        </small>
+
+                        <strong id="profileBudget">
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- LOCATION -->
+
+                <div class="profile-item">
+
+                    <span class="profile-icon">
+                        📍
+                    </span>
+
+
+                    <div>
+
+                        <small>
+                            PREFERRED LOCATION
+                        </small>
+
+                        <strong id="profileLocation">
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- PRIORITIES -->
+
+            <div class="profile-priorities">
+
+
+                <small>
+                    YOUR PRIORITIES
+                </small>
+
+
+                <div id="profilePriorities"
+                     class="priority-tags">
+
+                    <!-- JavaScript adds priorities -->
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             AI RECOMMENDATIONS
+        ================================================= -->
+
+        <div class="recommendation-heading">
+
+
+            <div class="recommendation-icon">
+                🎯
+            </div>
+
+
+            <div>
+
+
+                <div class="result-eyebrow">
+                    AI RECOMMENDATIONS
+                </div>
+
+
+                <h2>
+                    Colleges worth checking out
+                </h2>
+
+
+                <p>
+                    Matched to your course, budget and preferences.
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- COLLEGE RESULTS -->
+
+        <div id="collegeResults"
+             class="college-results">
+
+            <!-- JavaScript adds college cards here -->
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CAMPUS AI CHATBOT
+===================================================== -->
+
+<section id="chatbot">
+
+
+<div class="campusai-container">
+
+
+    <!-- HEADER -->
+
+    <div class="campusai-header">
+
+
+        <div class="campusai-avatar">
+            ✦
+        </div>
+
+
+        <div>
+
+
+            <div class="campusai-name">
+
+                CampusAI
+
+                <span class="online-dot"></span>
+
+            </div>
+
+
+            <div class="campusai-status">
+
+                Your college sidekick
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- CHAT WINDOW -->
+
+    <div class="campusai-chat"
+         id="campusaiChat">
+
+
+        <!-- AI MESSAGE -->
+
+        <div class="chat-row ai-row">
+
+
+            <div class="mini-avatar">
+                ✦
+            </div>
+
+
+            <div class="chat-content">
+
+
+                <div class="chat-name">
+                    CampusAI
+                </div>
+
+
+                <div class="chat-bubble ai-bubble">
+
+                    yo 👋
+
+                    <br><br>
+
+                    College research getting a little...
+                    <strong>overwhelming?</strong> 😭
+
+                    <br><br>
+
+                    Yeah. Let's fix that.
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- QUICK QUESTIONS -->
+
+        <div class="quick-prompts">
+
+
+            <button onclick="sendQuickPrompt(
+                'I am confused about what to do after 12th'
+            )">
+
+                I'm confused after 12th 😭
+
+            </button>
+
+
+
+            <button onclick="sendQuickPrompt(
+                'What can I do after Science?'
+            )">
+
+                What can I do after Science? 👀
+
+            </button>
+
+
+
+            <button onclick="sendQuickPrompt(
+                'Help me compare BBA and BCA'
+            )">
+
+                BBA vs BCA 👀
+
+            </button>
+
+
+
+            <button onclick="sendQuickPrompt(
+                'Help me find colleges'
+            )">
+
+                Find colleges for me 🎓
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- TYPING INDICATOR -->
+
+    <div class="typing-indicator hidden"
+         id="typingIndicator">
+
+
+        <span></span>
+
+        <span></span>
+
+        <span></span>
+
+
+        <label>
+            CampusAI is cooking...
+        </label>
+
+
+    </div>
+
+
+
+    <!-- INPUT -->
+
+    <div class="campusai-input-area">
+
+
+        <input
+            type="text"
+            id="campusaiInput"
+            placeholder="Ask CampusAI anything..."
+            autocomplete="off"
+        >
+
+
+        <button
+            id="campusaiSend"
+            onclick="sendCampusAIMessage()">
+
+            ➤
+
+        </button>
+
+
+    </div>
+
+
+
+    <div class="campusai-disclaimer">
+
+        CampusAI can make mistakes.
+        Double-check important admission
+        information with the college.
+
+    </div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+
+    <div class="logo">
+
+        <span>
+            AI
+        </span>CollegeAdvisor
+
+    </div>
+
+
+    <p>
+        College decisions, minus the chaos.
+    </p>
+
+
+    <div>
+        © 2026 AICollegeAdvisor
+    </div>
+
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+
+</body>
+
+</html>
