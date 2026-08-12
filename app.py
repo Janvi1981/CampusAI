@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify
+import pandas as pd
 from flask_cors import CORS
 from ai.gemini import ask_campus_ai
 from ai.recommender import (
@@ -100,6 +101,8 @@ def recommend():
             college = result["college"]
             score = result["score"]
 
+            print("DEBUG COLLEGE:", college)
+
             results.append({
                 "college_name": college["college_name"],
                 "city": college["city"],
@@ -107,14 +110,18 @@ def recommend():
                 "college_type": college["college_type"],
                 "stream": college["stream"],
                 "programs": str(college["programs"]).split("|"),
-                "annual_fees": college["annual_fees"],
-                "avg_placement": college["avg_placement"],
-                "highest_placement": college["highest_placement"],
+                "annual_fees": None if pd.isna(college["annual_fees"]) else college["annual_fees"],
+                "avg_placement": None if pd.isna(college["avg_placement"]) else college["avg_placement"],
+                "highest_placement": None if pd.isna(college["highest_placement"]) else college["highest_placement"],
                 "eligibility": college["eligibility"],
                 "hostel": college["hostel"],
                 "website": college["website"],
                 "match_score": score
             })
+
+        import json
+
+        print(json.dumps(results[:2], indent=2, default=str))
 
         return jsonify({
             "success": True,

@@ -1073,7 +1073,7 @@ async function submitAdvisor() {
 
         const profileResponse =
             await fetch(
-                "/api/advisor",
+                "https://campusai-backend-janavi.onrender.com/api/advisor",
                 {
 
                     method: "POST",
@@ -1169,6 +1169,8 @@ async function submitAdvisor() {
             recommendationResult
         );
 
+        console.log("Number of colleges:", recommendationResult.count);
+        console.log("College results:", recommendationResult.results);
 
         // =================================================
         // HIDE ADVISOR FORM
@@ -1769,7 +1771,7 @@ async function sendCampusAIMessage() {
 
         const response =
             await fetch(
-                "/api/chat",
+                "https://campusai-backend-janavi.onrender.com/api/chat",
                 {
 
                     method: "POST",

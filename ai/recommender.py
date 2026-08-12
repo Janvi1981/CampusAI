@@ -72,6 +72,20 @@ def normalize_text(value):
 
     return str(value).strip().lower()
 
+def normalize_location(location):
+
+    location = normalize_text(location)
+
+    location_aliases = {
+        "bangalore": "bengaluru",
+        "bengaluru": "bengaluru"
+    }
+
+    return location_aliases.get(
+        location,
+        location
+    )
+
 
 # =========================================================
 # CHECK DEGREE / PROGRAM
@@ -84,20 +98,71 @@ def degree_matches_program(degree, programs):
     if not degree:
         return False
 
+    # =================================================
+    # DEGREE ALIASES
+    # =================================================
+
+    degree_aliases = {
+
+        "b.tech cse": [
+            "b.tech cse",
+            "b.tech computer science",
+            "b.e cse",
+            "b.e computer science"
+        ],
+
+        "b.tech computer science": [
+            "b.tech cse",
+            "b.tech computer science",
+            "b.e cse",
+            "b.e computer science"
+        ]
+
+    }
+
+
+    # Get accepted names for the requested degree
+    accepted_degrees = degree_aliases.get(
+        degree,
+        [degree]
+    )
+
+
+    # =================================================
+    # CHECK PROGRAMS
+    # =================================================
+
     for program in programs:
 
         program = normalize_text(program)
 
+        if not program:
+            continue
+
+
+        # ---------------------------------------------
+        # Direct match / partial match
+        # ---------------------------------------------
+
         if (
-            degree == program
+            program in accepted_degrees
             or degree in program
             or program in degree
         ):
+
             return True
 
+
+        # ---------------------------------------------
+        # Alias match
+        # ---------------------------------------------
+
+        if program in accepted_degrees:
+
+            return True
+
+
     return False
-
-
 # =========================================================
 # FIND AND SCORE COLLEGES
 # =========================================================
@@ -113,8 +178,7 @@ def find_colleges_by_stream_degree_location_and_budget(
 
     stream = normalize_text(stream)
     degree = normalize_text(degree)
-    location = normalize_text(location)
-
+    location = normalize_location(location)
     budget_value = convert_budget_to_number(
         budget
     )
@@ -122,6 +186,29 @@ def find_colleges_by_stream_degree_location_and_budget(
     priorities = priorities or []
 
     scored_matches = []
+
+    print("\n========== COLLEGE MATCH DEBUG ==========")
+    print("Requested stream :", stream)
+    print("Requested degree :", degree)
+    print("Requested city   :", location)
+    print("Requested budget :", budget_value)
+    print("=========================================\n")
+
+    print("Cities in dataset:")
+    print(
+        colleges["city"]
+        .dropna()
+        .astype(str)
+        .unique()
+    )
+
+    print("\nStreams in dataset:")
+    print(
+        colleges["stream"]
+        .dropna()
+        .astype(str)
+        .unique()
+    )
 
 
     # =====================================================
@@ -138,7 +225,7 @@ def find_colleges_by_stream_degree_location_and_budget(
             college.get("stream", "")
         )
 
-        college_city = normalize_text(
+        college_city = normalize_location(
             college.get("city", "")
         )
 
@@ -168,21 +255,40 @@ def find_colleges_by_stream_degree_location_and_budget(
 
         try:
 
-            fee_value = str(
-                college["annual_fees"]
-            ).strip()
+            fee_value = college.get("annual_fees", "")
 
-            if fee_value.upper() in ["N/A", "NA", "", "NONE"]:
+            # Handle pandas NaN
+            if pd.isna(fee_value):
 
                 annual_fees = float("inf")
 
             else:
 
-                annual_fees = float(
-                fee_value.replace(",", "")
-            )
+                fee_value = str(fee_value).strip()
+
+                if fee_value.upper() in [
+                    "N/A",
+                    "NA",
+                    "",
+                    "NONE",
+                    "NAN"
+                ]:
+
+                    annual_fees = float("inf")
+
+                else:
+
+                    annual_fees = float(
+                        fee_value.replace(",", "")
+                    )
+
+                    # Extra protection
+                    if pd.isna(annual_fees):
+
+                        annual_fees = float("inf")
 
         except (ValueError, TypeError):
+
             annual_fees = float("inf")
 
         
@@ -323,41 +429,49 @@ def find_colleges_by_stream_degree_location_and_budget(
         # -------------------------------------------------
         # PLACEMENTS
         # -------------------------------------------------
+        
+        priority_max += 15
 
-        if "Placements" in priorities:
+        try:
 
-            priority_max += 15
+            placement_value = college.get(
+                "avg_placement",
+            ""
+            )
 
-            try:
+            if not pd.isna(placement_value):
 
                 placement_value = str(
-                    college.get("avg_placement", "")
+                    placement_value
                 ).strip()
 
-                if (
-                    placement_value.upper()
-                    not in ["N/A", "NA", "", "NONE", "NAN"]
-                ):
+                if placement_value.upper() not in [
+                    "N/A",
+                    "NA",
+                    "",
+                    "NONE",
+                    "NAN"
+                ]:
 
                     placement_value = float(
                         placement_value.replace(",", "")
-                )
+                    )
 
-                if placement_value >= 1000000:
-                    priority_score += 15
+                    if placement_value >= 1000000:
+                        priority_score += 15
 
-                elif placement_value >= 700000:
-                    priority_score += 12
+                    elif placement_value >= 700000:
+                        priority_score += 12
 
-                elif placement_value >= 500000:
-                    priority_score += 9
+                    elif placement_value >= 500000:
+                        priority_score += 9
 
-                elif placement_value > 0:
-                    priority_score += 5
+                    elif placement_value > 0:
+                        priority_score += 5
 
-            except (ValueError, TypeError):
+        except (ValueError, TypeError):
 
-                pass
+            pass
 
 
         # -------------------------------------------------
@@ -472,9 +586,20 @@ def find_colleges_by_stream_degree_location_and_budget(
         # SAVE MATCH
         # =================================================
 
+        # Convert pandas Series to normal dictionary
+        college_data = college.to_dict()
+
+        # Replace NaN / infinite values with None
+        college_data = {
+            key: None
+            if pd.isna(value) or value in [float("inf"), float("-inf")]
+            else value
+            for key, value in college_data.items()
+        }
+
         scored_matches.append({
 
-            "college": college,
+            "college": college_data,
 
             "score": match_percentage
 

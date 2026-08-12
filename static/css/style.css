@@ -609,28 +609,69 @@ button {
    LOCATION
    ========================================================= */
 
-.location-input input {
+/* ==========================================
+   LOCATION DROPDOWN
+========================================== */
+
+.location-input {
     width: 100%;
+    margin-top: 24px;
+}
 
-    padding: 17px;
+.location-input select {
+    width: 100%;
+    min-height: 64px;
 
-    border-radius: 14px;
+    padding: 0 52px 0 20px;
 
-    border: 1px solid #dbe3e0;
+    border-radius: 16px;
+    border: 2px solid #dbe3e0;
 
-    font-size: 15px;
+    background-color: #ffffff;
+
+    color: #263b38;
+
+    font-size: 16px;
+    font-weight: 500;
 
     outline: none;
 
-    transition: 0.2s;
+    cursor: pointer;
+
+    appearance: auto;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
 }
 
-.location-input input:focus {
+.location-input select:hover {
+    border-color: #0ca89b;
+}
+
+.location-input select:focus {
     border-color: #0ca89b;
 
     box-shadow:
-        0 0 0 4px rgba(12, 168, 155, 0.08);
+        0 0 0 5px rgba(12, 168, 155, 0.10);
 }
+
+/* Placeholder option */
+
+.location-input select:invalid {
+    color: #7d8c89;
+}
+
+/* Dropdown options */
+
+.location-input select option {
+    color: #263b38;
+    background: #ffffff;
+    padding: 12px;
+}
+
+/* Continue button */
 
 .full-button {
     width: 100%;
@@ -1852,4 +1893,138 @@ footer .logo span {
 
     box-shadow:
         0 8px 18px rgba(0, 0, 0, 0.06);
+}
+/* =========================================================
+   STEP 4 — AI RECOMMENDATIONS HEADER
+   ========================================================= */
+
+.recommendation-heading {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    margin-top: 42px;
+    margin-bottom: 24px;
+
+    padding: 24px 26px;
+
+    border: 1px solid #dfe8e5;
+    border-radius: 24px;
+
+    background: #ffffff;
+
+    overflow: hidden;
+}
+
+
+/* Decorative glow */
+
+.recommendation-heading::after {
+    content: "✦";
+
+    position: absolute;
+
+    right: 25px;
+    top: 12px;
+
+    font-size: 42px;
+
+    color: #0ca89b;
+
+    opacity: 0.10;
+
+    transform: rotate(15deg);
+}
+
+
+/* AI icon */
+
+.recommendation-icon {
+    width: 58px;
+    height: 58px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background: #e9faf7;
+
+    font-size: 27px;
+
+    box-shadow:
+        0 8px 20px rgba(12, 168, 155, 0.10);
+}
+
+
+/* Small AI RECOMMENDATIONS label */
+
+.recommendation-heading .result-eyebrow {
+    display: inline-block;
+
+    margin-bottom: 6px;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    color: #0ca89b;
+}
+
+
+/* Main heading */
+
+.recommendation-heading h2 {
+    margin: 0;
+
+    font-size: 28px;
+    line-height: 1.2;
+
+    font-weight: 800;
+
+    color: #101817;
+}
+
+
+/* Description */
+
+.recommendation-heading p {
+    margin: 7px 0 0;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+    color: #687773;
+}
+
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+    .recommendation-heading {
+        align-items: flex-start;
+
+        padding: 20px;
+
+        gap: 14px;
+    }
+
+    .recommendation-icon {
+        width: 48px;
+        height: 48px;
+
+        font-size: 22px;
+    }
+
+    .recommendation-heading h2 {
+        font-size: 23px;
+    }
+
 }
